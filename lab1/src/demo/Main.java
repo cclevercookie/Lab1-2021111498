@@ -1,10 +1,22 @@
+package demo;
+
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * demo.Main class for running the program.
+ */
 public class Main {
+
+    /**
+     * demo.Main method for executing the program.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
         System.out.println("请输入文本文件的路径：");
         String filePath = scanner.nextLine();
         Graph graph = TextProcessor.generateDirectedGraph(filePath);
@@ -40,10 +52,8 @@ public class Main {
                     System.out.println("生成的新文本为：\n" + newText);
 
                     // 创建新文件并将新文本写入其中
-                    try {
-                        FileWriter writer = new FileWriter("new_text.txt");
+                    try (FileWriter writer = new FileWriter("new_text.txt", StandardCharsets.UTF_8)) {
                         writer.write(newText);
-                        writer.close();
                         System.out.println("新文本已保存到 new_text.txt 文件中。");
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -57,7 +67,12 @@ public class Main {
                     break;
                 case 5:
                     String randomWalkResult = RandomWalker.randomWalk(graph);
-                    System.out.println("随机游走路径已保存到 random_walk.txt 文件中。");
+                    try (FileWriter writer = new FileWriter("random_walk.txt", StandardCharsets.UTF_8)) {
+                        writer.write(randomWalkResult);
+                        System.out.println("随机游走路径已保存到 random_walk.txt 文件中。");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 6:
                     System.out.println("程序退出！");

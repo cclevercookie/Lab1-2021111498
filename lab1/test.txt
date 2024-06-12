@@ -1,4 +1,7 @@
-To explore strange new worlds,
-To seek out new life and new civilizations
-To explore strange new worlds,
-yes
+@This is a sample with text file for testing the program#.
+
+It contains multiple a sentences with different lengths.
+
+The sentences include punctuation like periods, commas, and question marks.
+
+There are repeated words throughout the text, such as "sample", "text", and "program".
